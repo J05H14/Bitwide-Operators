@@ -20,4 +20,11 @@
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/image/PPMImage.class</name>
+			<type>1</type>
+			<location>C:/Users/J.Lazaro/Documents/application/PPMImage.class</location>
+		</link>
+	</linkedResources>
 </projectDescription>
