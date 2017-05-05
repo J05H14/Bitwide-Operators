@@ -41,9 +41,38 @@ public class PPMSub extends PPMImage {
 		return message;
 	}
 	public void sepia(){
-
+		for(int i = 0; i < getPixelData().length; i++){
+			if(i % 3 == 0){
+				getPixelData()[i] = (char) ((getPixelData()[i] * 0.393) + (getPixelData()[i + 1] * 0.769) + (getPixelData()[i + 2] * 0.189));
+			}
+			else if(i % 3 == 1){
+				//getPixelData()[i] = (char) ((getPixelData()[i - 1] * 0.349) + (getPixelData()[i] * 0.686) + (getPixelData()[i + 1] * 0.168));
+			}
+			else{
+				getPixelData()[i] = (char) ((getPixelData()[i - 2] * 0.272) + (getPixelData()[i - 1] * 0.534) + (getPixelData()[i] * 0.131));
+			}
+			
+			if(getPixelData()[i] > 255){
+				getPixelData()[i] = 255;
+			}
+		}
+		
+		writeImage("Sepia_PPM.ppm");
 	}
 	public void grayscale(){
+		for(int i = 0; i < getPixelData().length; i++){
+			if(i % 3 == 0){
+				getPixelData()[i] = (char) ((getPixelData()[i] * 0.299) + (getPixelData()[i + 1] * 0.587) + (getPixelData()[i + 2] * 0.114));
+			}
+			else if(i % 3 == 1){
+				getPixelData()[i] = (char) ((getPixelData()[i - 1] * 0.299) + (getPixelData()[i] * 0.587) + (getPixelData()[i + 1] * 0.114));
+			}
+			else{
+				getPixelData()[i] = (char) ((getPixelData()[i - 2] * 0.299) + (getPixelData()[i - 1] * 0.587) + (getPixelData()[i] * 0.114));
+			}
+		}
+		
+		writeImage("Grayscale_PPM.ppm");
 
 	}
 	public void negative(){

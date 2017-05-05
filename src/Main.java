@@ -29,7 +29,7 @@ public class Main extends Application {
 		}	
 		
 		PPMSub ppm = new PPMSub(PPMImage);
-		ppm.negative();
+		ppm.sepia();
 		try {
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root);
