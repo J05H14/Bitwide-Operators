@@ -47,7 +47,10 @@ public class PPMSub extends PPMImage {
 
 	}
 	public void negative(){
-
+		for(int i = 0; i < getPixelData().length; i++){
+			getPixelData()[i] = (char) (255 - getPixelData()[i]);
+		}
+		writeImage("Negative_PPM.ppm");
 	}
 
 }
