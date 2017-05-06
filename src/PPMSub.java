@@ -46,7 +46,7 @@ public class PPMSub extends PPMImage {
 				getPixelData()[i] = (char) ((getPixelData()[i] * 0.393) + (getPixelData()[i + 1] * 0.769) + (getPixelData()[i + 2] * 0.189));
 			}
 			else if(i % 3 == 1){
-				//getPixelData()[i] = (char) ((getPixelData()[i - 1] * 0.349) + (getPixelData()[i] * 0.686) + (getPixelData()[i + 1] * 0.168));
+				getPixelData()[i] = (char) ((getPixelData()[i - 1] * 0.349) + (getPixelData()[i] * 0.686) + (getPixelData()[i + 1] * 0.168));
 			}
 			else{
 				getPixelData()[i] = (char) ((getPixelData()[i - 2] * 0.272) + (getPixelData()[i - 1] * 0.534) + (getPixelData()[i] * 0.131));
