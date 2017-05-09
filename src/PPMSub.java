@@ -7,6 +7,7 @@ public class PPMSub extends PPMImage {
 		// TODO Auto-generated constructor stub
 	}
 	public void hideMessage(String message){
+		message += '\0';
 		for(int i = 1; i < message.length(); i++){
 			int colorCount = 0;
 			char letter = message.charAt(i);
@@ -33,10 +34,20 @@ public class PPMSub extends PPMImage {
 	}
 	public String recoverMesssage(){
 		String message = "";
+		char currChar = '\u0000';
+		int count = 0;
 		
-//		for(int ){
-//			
-//		}
+		while(currChar != '\0'){
+			/*
+			 * 
+			 * mask = 0000 0001;
+			 * 
+			 * check getPixelData [count]
+			 * add last bit to 8th bit of currChar
+			 * 
+			 * count++;
+			 */
+		}
 		
 		return message;
 	}

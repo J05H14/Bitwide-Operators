@@ -46,6 +46,10 @@ public class Main extends Application {
 			
 			iBox.getChildren().add(iv);
 			
+			Button hide = new Button("Hide Message");
+			hide.setOnAction(e -> {
+				ppm.hideMessage("hi");
+			});
 			Button sepia = new Button("Sepia");
 			sepia.setOnAction(e -> {
 				ppm.sepia();
@@ -61,6 +65,7 @@ public class Main extends Application {
 			buttons.getChildren().add(sepia);
 			buttons.getChildren().add(gray);
 			buttons.getChildren().add(negative);
+			buttons.getChildren().add(hide);
 			
 			
 			root.setCenter(iBox);
