@@ -8,9 +8,14 @@ public class PPMSub extends PPMImage {
 	}
 	public void hideMessage(String message){
 		message += "\0";
-		System.out.println(message);
+		System.out.println(message + " " + (int) message.charAt(0) +"\n");
+		System.out.println(message + " " + (int) message.charAt(1) +"\n");
+		System.out.println(message + " " + (int) message.charAt(2) +"\n");
+		
+		int colorCount = 0;
 		for(int i = 0; i < message.length(); i++){
-			int colorCount = 0;
+			
+			
 			char letter = message.charAt(i);
 			
 			for(int bit = 8; bit > 0; bit--){
@@ -25,10 +30,13 @@ public class PPMSub extends PPMImage {
 				else{
 					mask = 1;
 					
-					getPixelData()[colorCount] = (char) (getPixelData()[colorCount] & mask);
+					getPixelData()[colorCount] = (char) (getPixelData()[colorCount]| mask);
 				}
+				System.out.print((getPixelData()[colorCount] & 1) + " ");
 				colorCount++;
 			}
+			System.out.println();
+			
 		}
 		
 		writeImage("PPM_with_message.ppm");
