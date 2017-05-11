@@ -21,7 +21,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		File PPMImage = null;		
-		JFileChooser fc = new JFileChooser();
+		JFileChooser fc = new JFileChooser(".");
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("PPM Files", "ppm");
 		fc.setFileFilter(filter);
 		int retVal = fc.showOpenDialog(null);
@@ -48,7 +48,7 @@ public class Main extends Application {
 			
 			Button hide = new Button("Hide Message");
 			hide.setOnAction(e -> {
-				ppm.hideMessage("t e");
+				ppm.hideMessage("testing");
 			});
 			Button read = new Button("Recover Message");
 			read.setOnAction(e -> {

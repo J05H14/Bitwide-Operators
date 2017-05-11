@@ -8,37 +8,34 @@ public class PPMSub extends PPMImage {
 	}
 	public void hideMessage(String message){
 		message += "\0";
-		System.out.println(message + " " + (int) message.charAt(0) +"\n");
-		System.out.println(message + " " + (int) message.charAt(1) +"\n");
-		System.out.println(message + " " + (int) message.charAt(2) +"\n");
-		
+
 		int colorCount = 0;
 		for(int i = 0; i < message.length(); i++){
-			
-			
+			System.out.println(message + " " + (int) message.charAt(i) +"\n");
+
 			char letter = message.charAt(i);
-			
+
 			for(int bit = 8; bit > 0; bit--){
 				char mask = (char) (1 << (bit - 1));
 
 				if((letter & mask) == 0){
 					mask = (char) ~1;
-					
+
 					getPixelData()[colorCount] = (char) (getPixelData()[colorCount] & mask);
-					
+
 				}
 				else{
 					mask = 1;
-					
+
 					getPixelData()[colorCount] = (char) (getPixelData()[colorCount]| mask);
 				}
 				System.out.print((getPixelData()[colorCount] & 1) + " ");
 				colorCount++;
 			}
 			System.out.println();
-			
+
 		}
-		
+
 		writeImage("PPM_with_message.ppm");
 	}
 	public String recoverMesssage(){
@@ -46,26 +43,33 @@ public class PPMSub extends PPMImage {
 		char currChar = '\0';
 		int count = 0;
 		boolean done = false;
-		
-		System.out.println((int) currChar);
+
 		while(!done){
-			for(int bit = 0; bit < 9; bit++){
+			for(int bit = 1; bit < 9; bit++){
 				char lsb = (char) (getPixelData()[count] & 1);
-				
-				currChar += lsb;
-				//System.out.println((int) currChar); 
-				System.out.println((int) lsb);
-				currChar = (char) (currChar << 1);
+
+				//currChar = lsb; //probably is whats messing me up
+				if(lsb == 0){
+					currChar = (char) (currChar & ~1);
+				}
+				else{
+					currChar = (char) (currChar | lsb);
+				}
+				System.out.println("currChar: " + (int) currChar); 
+				System.out.println("lsb:" + (int) lsb);
+				if(bit != 8){
+					currChar = (char) (currChar << 1);
+				}
 				count++;
 			}
 			if(currChar == '\0'){
 				done = true;
 			}
-			System.out.println(currChar);
+			System.out.println("\nFinal CurrChar: " + (int) currChar + ": " + currChar);
 			message += currChar;
 			currChar = '\0';
 		}
-		
+		System.out.println("\nMessage: " + message);
 		return message;
 	}
 	public void sepia(){
@@ -79,12 +83,12 @@ public class PPMSub extends PPMImage {
 			else{
 				getPixelData()[i] = (char) ((getPixelData()[i - 2] * 0.272) + (getPixelData()[i - 1] * 0.534) + (getPixelData()[i] * 0.131));
 			}
-			
+
 			if(getPixelData()[i] > 255){
 				getPixelData()[i] = 255;
 			}
 		}
-		
+
 		writeImage("Sepia_PPM.ppm");
 	}
 	public void grayscale(){
@@ -99,7 +103,7 @@ public class PPMSub extends PPMImage {
 				getPixelData()[i] = (char) ((getPixelData()[i - 2] * 0.299) + (getPixelData()[i - 1] * 0.587) + (getPixelData()[i] * 0.114));
 			}
 		}
-		
+
 		writeImage("Grayscale_PPM.ppm");
 
 	}
