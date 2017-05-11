@@ -11,8 +11,7 @@ public class PPMSub extends PPMImage {
 
 		int colorCount = 0;
 		for(int i = 0; i < message.length(); i++){
-			System.out.println(message + " " + (int) message.charAt(i) +"\n");
-
+			
 			char letter = message.charAt(i);
 
 			for(int bit = 8; bit > 0; bit--){
@@ -29,10 +28,8 @@ public class PPMSub extends PPMImage {
 
 					getPixelData()[colorCount] = (char) (getPixelData()[colorCount]| mask);
 				}
-				System.out.print((getPixelData()[colorCount] & 1) + " ");
 				colorCount++;
 			}
-			System.out.println();
 
 		}
 
@@ -55,8 +52,7 @@ public class PPMSub extends PPMImage {
 				else{
 					currChar = (char) (currChar | lsb);
 				}
-				System.out.println("currChar: " + (int) currChar); 
-				System.out.println("lsb:" + (int) lsb);
+				
 				if(bit != 8){
 					currChar = (char) (currChar << 1);
 				}
@@ -65,11 +61,9 @@ public class PPMSub extends PPMImage {
 			if(currChar == '\0'){
 				done = true;
 			}
-			System.out.println("\nFinal CurrChar: " + (int) currChar + ": " + currChar);
 			message += currChar;
 			currChar = '\0';
 		}
-		System.out.println("\nMessage: " + message);
 		return message;
 	}
 	public void sepia(){
