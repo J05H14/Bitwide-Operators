@@ -11,7 +11,7 @@ public class PPMSub extends PPMImage {
 
 		int colorCount = 0;
 		for(int i = 0; i < message.length(); i++){
-			
+
 			char letter = message.charAt(i);
 
 			for(int bit = 8; bit > 0; bit--){
@@ -52,7 +52,7 @@ public class PPMSub extends PPMImage {
 				else{
 					currChar = (char) (currChar | lsb);
 				}
-				
+
 				if(bit != 8){
 					currChar = (char) (currChar << 1);
 				}
@@ -67,35 +67,50 @@ public class PPMSub extends PPMImage {
 		return message;
 	}
 	public void sepia(){
-		for(int i = 0; i < getPixelData().length; i++){
-			if(i % 3 == 0){
-				getPixelData()[i] = (char) ((getPixelData()[i] * 0.393) + (getPixelData()[i + 1] * 0.769) + (getPixelData()[i + 2] * 0.189));
-			}
-			else if(i % 3 == 1){
-				getPixelData()[i] = (char) ((getPixelData()[i - 1] * 0.349) + (getPixelData()[i] * 0.686) + (getPixelData()[i + 1] * 0.168));
-			}
-			else{
-				getPixelData()[i] = (char) ((getPixelData()[i - 2] * 0.272) + (getPixelData()[i - 1] * 0.534) + (getPixelData()[i] * 0.131));
-			}
+		char rResult;
+		char gResult;
+		char bResult;
+		char[] pixelData = getPixelData();
+		
+		for(int i = 0; i < getPixelData().length - 2; i+=3){
+			int red = pixelData[i];
+			int green = pixelData[i + 1];
+			int blue = pixelData[i + 2];
 
-			if(getPixelData()[i] > 255){
-				getPixelData()[i] = 255;
+			rResult = (char) ((red * 0.393) + (green * 0.769) + (blue * 0.189));
+			gResult = (char) ((red * 0.349) + (green * 0.686) + (blue * 0.168));
+			bResult = (char) ((red * 0.272) + (green * 0.534) + (blue * 0.131));
+
+
+			if(rResult > 255){
+				rResult = 255;
 			}
+			
+			if(gResult > 255){
+				gResult =  255;
+			}
+			
+			if(bResult > 255){
+				bResult = 255;
+			}
+			getPixelData()[i] = rResult;
+			getPixelData()[i + 1] = gResult;
+			getPixelData()[i + 2] = bResult;
+			
+
 		}
 
 		writeImage("Sepia_PPM.ppm");
 	}
 	public void grayscale(){
-		for(int i = 0; i < getPixelData().length; i++){
-			if(i % 3 == 0){
-				getPixelData()[i] = (char) ((getPixelData()[i] * 0.299) + (getPixelData()[i + 1] * 0.587) + (getPixelData()[i + 2] * 0.114));
-			}
-			else if(i % 3 == 1){
-				getPixelData()[i] = (char) ((getPixelData()[i - 1] * 0.299) + (getPixelData()[i] * 0.587) + (getPixelData()[i + 1] * 0.114));
-			}
-			else{
-				getPixelData()[i] = (char) ((getPixelData()[i - 2] * 0.299) + (getPixelData()[i - 1] * 0.587) + (getPixelData()[i] * 0.114));
-			}
+		for(int i = 0; i < getPixelData().length - 2; i += 3){
+			char red = getPixelData()[i];
+			char green = getPixelData()[i + 1];
+			char blue = getPixelData()[i + 2];
+			
+			getPixelData()[i] = (char) ((red * 0.299) + (green * 0.587) + (blue * 0.114));
+			getPixelData()[i + 1] = (char) ((red * 0.299) + (green * 0.587) + (blue * 0.114));
+			getPixelData()[i + 2] = (char) ((red * 0.299) + (green * 0.587) + (blue * 0.114));
 		}
 
 		writeImage("Grayscale_PPM.ppm");

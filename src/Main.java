@@ -118,6 +118,8 @@ public class Main extends Application {
 		HBox iBox = new HBox();
 		Stage stage = new Stage();
 		ImageView iv = new ImageView(image);
+		iv.setPreserveRatio(true);
+		iv.setFitHeight(500);
 		Scene scene = new Scene(bp);
 		
 		iBox.getChildren().add(iv);
@@ -127,7 +129,7 @@ public class Main extends Application {
 		
 		bp.setCenter(iBox);
 		stage.setScene(scene);
-		bp.setBottom(buttons);
+		bp.setTop(buttons);
 		stage.show();
 	}
 	
